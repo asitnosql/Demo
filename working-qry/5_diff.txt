@@ -1,0 +1,25 @@
+let $xml :=
+<employee>
+  <emp id="1">
+   <name >Ram</name>
+   <phone_no>987543210</phone_no>
+    <salary>50000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Delhi</home_add>
+    </address>
+  </emp>
+  <emp id="2">
+   <name>Mohan</name>
+   <phone_no>887543210</phone_no>
+    <salary>60000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Hyderabad</home_add>
+    </address>
+</emp>
+</employee>
+
+(: return $xml/employee/emp :)
+let $doc := fn:doc("/xml-demo/emp-xpath.xml")
+return $doc/employee/emp

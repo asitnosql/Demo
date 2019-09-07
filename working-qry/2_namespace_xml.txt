@@ -1,0 +1,35 @@
+xquery version "1.0-ml";
+
+let $xml :=
+<employee>
+  <emp xmlns="http://www.hcl.com/emp/">
+   <name>Ram</name>
+   <phone_no>987543210</phone_no>
+    <salary>50000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Delhi</home_add>
+    </address>
+  </emp>
+  <emp xmlns="http://www.tcs.com/emp/">
+   <name>Mohan</name>
+   <phone_no>887543210</phone_no>
+    <salary>60000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Hyderabad</home_add>
+    </address>
+</emp>
+</employee>
+
+return xdmp:document-insert("/xml-demo/emp-ns.xml",$xml , (),())
+    
+	
+	=====================================
+	
+	xquery version "1.0-ml";
+declare namespace  hcl = "http://www.hcl.com/emp/";
+declare namespace  tcs = "http://www.tcs.com/emp/";
+
+let $empDoc := fn:doc("/xml-demo/emp-ns.xml")
+return $empDoc/employee/hcl:emp

@@ -1,0 +1,12 @@
+xquery version "1.0-ml";
+ let $xml := fn:doc("/xml-demo/emp-xpath.xml")/employee
+for $eachEmp in $xml/emp 
+where $eachEmp/salary > 50000
+return $eachEmp
+
+(:
+let $xml := fn:doc("/xml-demo/emp-xpath.xml")/employee
+for $eachEmp in $xml/emp 
+order by $eachEmp/name descending
+return $eachEmp
+:)

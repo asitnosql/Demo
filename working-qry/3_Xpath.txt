@@ -1,0 +1,35 @@
+xquery version "1.0-ml";
+let $xml :=
+<employee>
+  <emp id="1">
+   <name >Ram</name>
+   <phone_no>987543210</phone_no>
+    <salary>50000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Delhi</home_add>
+    </address>
+  </emp>
+  <emp id="2">
+   <name>Mohan</name>
+   <phone_no>887543210</phone_no>
+    <salary>60000</salary>
+    <address>
+       <ofc_add>Pune</ofc_add>
+       <home_add>Hyderabad</home_add>
+    </address>
+</emp>
+</employee>
+
+return xdmp:document-insert("/xml-demo/emp-xpath.xml", $xml, (),())
+
+    =============================
+	
+	xquery version "1.0-ml";
+(: /  //  .  ..  @  [] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[@id] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[1] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[last()] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp/child::* :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/child::node() :)  
+ 
