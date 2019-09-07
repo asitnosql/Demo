@@ -1,0 +1,225 @@
+<export><workspace name="hcl-demo"><query name="xml" focus="false" listorder="1" taborder="1" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">let $xml :=
+&lt;employee&gt;
+  &lt;emp id="1"&gt;
+   &lt;name &gt;Ram&lt;/name&gt;
+   &lt;phone_no&gt;987543210&lt;/phone_no&gt;
+    &lt;salary&gt;50000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Delhi&lt;/home_add&gt;
+    &lt;/address&gt;
+  &lt;/emp&gt;
+  &lt;emp id="2"&gt;
+   &lt;name&gt;Mohan&lt;/name&gt;
+   &lt;phone_no&gt;887543210&lt;/phone_no&gt;
+    &lt;salary&gt;60000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Hyderabad&lt;/home_add&gt;
+    &lt;/address&gt;
+&lt;/emp&gt;
+&lt;/employee&gt;
+
+return $xml
+
+    </query><query name="xml-namespace" focus="false" listorder="2" taborder="2" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+let $xml :=
+&lt;employee&gt;
+  &lt;emp xmlns="http://www.hcl.com/emp/"&gt;
+   &lt;name&gt;Ram&lt;/name&gt;
+   &lt;phone_no&gt;987543210&lt;/phone_no&gt;
+    &lt;salary&gt;50000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Delhi&lt;/home_add&gt;
+    &lt;/address&gt;
+  &lt;/emp&gt;
+  &lt;emp xmlns="http://www.tcs.com/emp/"&gt;
+   &lt;name&gt;Mohan&lt;/name&gt;
+   &lt;phone_no&gt;887543210&lt;/phone_no&gt;
+    &lt;salary&gt;60000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Hyderabad&lt;/home_add&gt;
+    &lt;/address&gt;
+&lt;/emp&gt;
+&lt;/employee&gt;
+
+return xdmp:document-insert("/xml-demo/emp-ns.xml",$xml , (),())
+    </query><query name="namespace-qry-ex" focus="false" listorder="3" taborder="3" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+declare namespace  hcl = "http://www.hcl.com/emp/";
+declare namespace  tcs = "http://www.tcs.com/emp/";
+
+let $empDoc := fn:doc("/xml-demo/emp-ns.xml")
+return $empDoc/employee/hcl:emp</query><query name="xpath-xml-insert" focus="false" listorder="4" taborder="4" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+let $xml :=
+&lt;employee&gt;
+  &lt;emp id="1"&gt;
+   &lt;name &gt;Ram&lt;/name&gt;
+   &lt;phone_no&gt;987543210&lt;/phone_no&gt;
+    &lt;salary&gt;50000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Delhi&lt;/home_add&gt;
+    &lt;/address&gt;
+  &lt;/emp&gt;
+  &lt;emp id="2"&gt;
+   &lt;name&gt;Mohan&lt;/name&gt;
+   &lt;phone_no&gt;887543210&lt;/phone_no&gt;
+    &lt;salary&gt;60000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Hyderabad&lt;/home_add&gt;
+    &lt;/address&gt;
+&lt;/emp&gt;
+&lt;/employee&gt;
+
+return xdmp:document-insert("/xml-demo/emp-xpath.xml", $xml, (),())
+
+    </query><query name="xpath-ex" focus="false" listorder="5" taborder="5" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+(: /  //  .  ..  @  [] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[@id] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[1] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp[last()] :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/emp/child::* :)
+(: fn:doc("/xml-demo/emp-xpath.xml")/employee/child::node() :)  
+ 
+</query><query name="flwor" focus="false" listorder="6" taborder="6" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+ let $xml := fn:doc("/xml-demo/emp-xpath.xml")/employee
+for $eachEmp in $xml/emp 
+where $eachEmp/salary &gt; 50000
+return $eachEmp
+
+(:
+let $xml := fn:doc("/xml-demo/emp-xpath.xml")/employee
+for $eachEmp in $xml/emp 
+order by $eachEmp/name descending
+return $eachEmp
+:)</query><query name="diff" focus="false" listorder="7" taborder="7" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">let $xml :=
+&lt;employee&gt;
+  &lt;emp id="1"&gt;
+   &lt;name &gt;Ram&lt;/name&gt;
+   &lt;phone_no&gt;987543210&lt;/phone_no&gt;
+    &lt;salary&gt;50000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Delhi&lt;/home_add&gt;
+    &lt;/address&gt;
+  &lt;/emp&gt;
+  &lt;emp id="2"&gt;
+   &lt;name&gt;Mohan&lt;/name&gt;
+   &lt;phone_no&gt;887543210&lt;/phone_no&gt;
+    &lt;salary&gt;60000&lt;/salary&gt;
+    &lt;address&gt;
+       &lt;ofc_add&gt;Pune&lt;/ofc_add&gt;
+       &lt;home_add&gt;Hyderabad&lt;/home_add&gt;
+    &lt;/address&gt;
+&lt;/emp&gt;
+&lt;/employee&gt;
+
+(: return $xml/employee/emp :)
+let $doc := fn:doc("/xml-demo/emp-xpath.xml")
+return $doc/employee/emp</query><query name="doc-add-col" focus="false" listorder="8" taborder="8" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+(: xdmp:document-delete(cts:uris((),(),cts:directory-query("/C/", "infinity"))) :)
+
+xdmp:document-add-collections(cts:uris((),(),cts:directory-query("/student/", "infinity")), "Student")
+;
+ fn:collection("Student")
+
+</query><query name="search" focus="false" listorder="9" taborder="9" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+import module namespace search = "http://marklogic.com/appservices/search"  at "/MarkLogic/appservices/search/search.xqy";
+
+search:search("Tom",
+    &lt;options xmlns="http://marklogic.com/appservices/search"&gt;
+       &lt;return-results&gt;true&lt;/return-results&gt;
+     &lt;options xmlns="http://marklogic.com/appservices/search"&gt;
+&lt;/options&gt;
+    &lt;/options&gt;)
+    
+    (:
+    let $options := 
+&lt;search:options xmlns="http://marklogic.com/appservices/search"&gt;
+ &lt;default-suggestion-source&gt;
+    &lt;range collation="http://marklogic.com/collation/" 
+          type="xs:string" facet="true"&gt;
+      &lt;element ns="" name="name"/&gt;
+   &lt;/range&gt;
+ &lt;/default-suggestion-source&gt;
+&lt;/search:options&gt;
+return
+search:suggest("To", $options)
+    :)
+</query><query name="cts:query" focus="true" listorder="10" taborder="10" active="true" database="6993699874799925179" server="9009861705317668709" database-name="hcl-demo" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+(: cts:search(fn:collection("Student"),
+    cts:word-query("Tom"))
+    :)
+    
+(:  cts:search(fn:doc(),cts:word-query("tom","case-insensitive"),"format-xml") :)
+(:
+cts:search(fn:doc(), cts:or-query((
+                        cts:word-query("Geeta"),
+                       
+                          cts:word-query("Chennai")
+                      )) :)
+ (:                     
+cts:search(fn:doc(), cts:and-not-query(
+                        cts:word-query("Tom"),
+                          cts:word-query("Chennai")
+                      ))   :)                     
+  (:           
+ cts:search(fn:doc(), cts:element-query(
+      xs:QName("name"),
+      "Ram"))          
+      :)
+      
+  (:           
+ cts:search(fn:doc(), cts:element-value-query(
+      xs:QName("name"),
+      "Ram"))          
+      :)
+(:          
+ cts:search(fn:doc(), cts:element-range-query(xs:QName("dob"), "&lt;=",
+      xs:date("2000-01-01"))
+      
+      :)
+      
+ (: cts:element-word-match(xs:QName("name"),"R*") :)  (: retuns matched word in text :)
+(: 
+ cts:search(fn:doc(),
+    cts:element-attribute-value-query(
+      xs:QName("student"),
+      xs:QName("id"),
+      "1"))
+      :)
+   (:
+   cts:search(fn:doc(),
+  cts:element-attribute-range-query(
+      xs:QName("student"), xs:QName("id"), "&gt;=",
+      "3")) 
+      :)
+     
+(: cts:element-value-match(xs:QName("name"),"r*") :) (: retuns complete value in text :)
+
+(: cts:uri-match("*.xml", (), cts:element-value-query(
+      xs:QName("name"),
+      "Rihana"))
+:)
+(: cts:search(fn:doc(),cts:collection-query("Student")) :)
+
+(: cts:uris((),(),cts:collection-query("Student")) :)
+(:
+ cts:search(fn:doc(),
+    cts:near-query(
+      (cts:word-query("she"),
+      cts:word-query("basketball")),
+      5))
+:)
+          
+ cts:search(fn:doc(), cts:not-query( cts:element-query(
+      xs:QName("name"),
+      "tom")
+      ))   
+      
+
+      </query></workspace></export>

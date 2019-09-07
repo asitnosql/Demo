@@ -1,0 +1,90 @@
+MLCP :
+
+Import :
+mlcp.bat import -host localhost -port 8000 -database hcl-demo ^
+-username admin -password admin -input_file_type documents ^
+-document_type mixed -input_file_path C:\Users\nautiyal\Desktop\HCL\data\student ^
+-output_uri_replace "^(.*data),''" -thread_count 8
+
+
+Export :
+i. 
+ mlcp.bat export -host localhost -port 8000 -database hcl-demo ^
+-username admin -password admin -mode local ^
+-output_file_path   C:\Users\nautiyal\Desktop\HCL\Import -collection_filter Student
+
+ii.
+mlcp.bat export -host localhost -port 8000 -database hcl-demo ^
+-username admin -password admin -mode local ^
+-output_file_path C:\Users\nautiyal\Desktop\HCL\Import -collection_filter Student -compress true
+
+
+Search:Search 
+
+search:search("Jhon AND tom",
+    <options xmlns="http://marklogic.com/appservices/search">
+       <return-results>true</return-results>
+      <additional-query>
+    <cts:directory-query xmlns:cts="http://marklogic.com/cts">
+      <cts:uri>/student/</cts:uri>
+    </cts:directory-query>
+  </additional-query>
+    </options>)
+	
+1. Sort 
+search:search("is",
+    <options xmlns="http://marklogic.com/appservices/search">
+       <return-results>true</return-results>
+     <sort-order type="string" direction="descending">
+  <element  name="name"/>
+</sort-order>
+    </options>)
+	
+2. Transform results
+i. search:search("Tom",
+    <options xmlns="http://marklogic.com/appservices/search">
+       <return-results>true</return-results>
+     <transform-results apply="raw" />
+    </options>)
+	
+ii. search:search("Tom",
+    <options xmlns="http://marklogic.com/appservices/search">
+       <return-results>true</return-results>
+<transform-results apply="empty-snippet" />
+    </options>)
+
+3. Additional query 
+
+search:search("Ram",
+    <options xmlns="http://marklogic.com/appservices/search">
+       <return-results>true</return-results>
+      <additional-query>
+    <cts:directory-query xmlns:cts="http://marklogic.com/cts">
+      <cts:uri>/student/</cts:uri>
+    </cts:directory-query>
+  </additional-query>
+    </options>)
+	
+4. let $options := 
+<search:options xmlns="http://marklogic.com/appservices/search">
+ <default-suggestion-source>
+    <range collation="http://marklogic.com/collation/" 
+          type="xs:string" facet="true">
+      <element ns="" name="name"/>
+   </range>
+ </default-suggestion-source>
+</search:options>
+return
+search:suggest("To", $options)
+
+CTS:QUERY
+
+i. cts:search(fn:collection("Student"),
+    cts:word-query("Tom"))
+	
+ii. cts:search(fn:doc(),cts:word-query("tom","case-insensitive"))
+
+iii. cts:search(fn:doc(), cts:and-not-query(
+                        cts:word-query("Tom"),
+                          cts:word-query("Chennai")
+                      ))
