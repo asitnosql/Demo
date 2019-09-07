@@ -1,0 +1,10 @@
+ <student id="1">
+   <name>Tom Alter</name>
+   <gender>Male</gender>
+   <dob>2000-02-01</dob>
+   <f_name>Jhon Alter</f_name>
+   <phone_no>987543210</phone_no>
+    <std>4</std>
+    <address>Chennai</address>
+	<description>Tom is very good in academics. He is football player.</description>
+  </student>

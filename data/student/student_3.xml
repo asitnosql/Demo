@@ -1,0 +1,10 @@
+ <student id="3">
+   <name>Rihana</name>
+   <gender>Female</gender>
+   <dob>1999-10-12</dob>
+   <f_name>Abdul Khan</f_name>
+   <phone_no>887543223</phone_no>
+    <std>5</std>
+    <address>Mumbai</address>
+	<description>Rihana is very good in sports. She is basketball player.</description>
+  </student>

@@ -1,0 +1,10 @@
+ <student id="2">
+   <name>Tom Ferrari</name>
+   <gender>Male</gender>
+   <dob>2000-08-10</dob>
+   <f_name>Jhon</f_name>
+   <phone_no>987543223</phone_no>
+    <std>4</std>
+    <address>Mumbai</address>
+	<description>Tom is very good musician. He plays guitar very well.</description>
+  </student>
