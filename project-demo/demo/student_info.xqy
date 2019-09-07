@@ -1,5 +1,5 @@
 xquery version "1.0-ml";
-import module namespace custom-function="http://uhg.com/custom-function" at "custom-function.xqy";
+
 import module namespace json="http://marklogic.com/xdmp/json" at "/MarkLogic/json/json.xqy";
 
 

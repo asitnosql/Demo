@@ -8,7 +8,7 @@ xdmp:set-response-content-type("text/html")
 ,
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
 		Students Details :
 	</head>
@@ -21,10 +21,10 @@ xdmp:set-response-content-type("text/html")
 			return 
 			(
 			<tr>
-			 <td>{$eachStudent/*:student/*:name/text()}</td>
-			 <td>{$eachStudent/*:student/*:f_name/text()}</td>
-			 <td>{$eachStudent/*:student/*:gender/text()}</td>
-			 <td>{$eachStudent/*:student/*:dob/text()}</td>
+			 <td>{$eachStudent/student/name/text()}</td>
+			 <td>{$eachStudent/student/f_name/text()}</td>
+			 <td>{$eachStudent/student/gender/text()}</td>
+			 <td>{$eachStudent/student/dob/text()}</td>
 			</tr>
 			)
 		 }
